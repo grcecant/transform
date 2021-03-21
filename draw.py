@@ -37,6 +37,11 @@ def draw_line( x0, y0, x1, y1, screen, color ):
         x1 = xt
         y1 = yt
 
+    x0 = int(x0)
+    x1 = int(x1)
+    y0 = int(y0)
+    y1 = int(y1)
+
     x = x0
     y = y0
     A = 2 * (y1 - y0)

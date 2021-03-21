@@ -65,11 +65,12 @@ def save_extension( screen, fname ):
 
     img.putdata(pixels)
     img.save(fname, 'PNG')
-    # ppm_name = fname[:fname.find('.')] + '.ppm'
-    # save_ppm_ascii( screen, ppm_name )
-    # p = Popen( ['convert', ppm_name, fname ], stdin=PIPE, stdout = PIPE )
-    # p.communicate()
-    # remove(ppm_name)
+    #ppm_name = fname[:fname.find('.')] + '.ppm'
+    #save_ppm_ascii( screen, ppm_name )
+    #p = Popen( ['convert', ppm_name, fname ], stdin=PIPE, stdout = PIPE )
+    #p.communicate()
+    #remove(ppm_name)
+
 
 def display( screen ):
     img = Image.new('RGB', (len(screen[0]), len(screen)))
@@ -81,8 +82,9 @@ def display( screen ):
 
     img.putdata(pixels)
     img.show()
-    # ppm_name = 'pic.ppm'
-    # save_ppm_ascii( screen, ppm_name )
-    # p = Popen( ['display', ppm_name], stdin=PIPE, stdout = PIPE )
-    # p.communicate()
-    # remove(ppm_name)
+
+    #ppm_name = 'pic.ppm'
+    #save_ppm_ascii( screen, ppm_name )
+    #p = Popen( ['display', ppm_name], stdin=PIPE, stdout = PIPE )
+    #p.communicate()
+    #remove(ppm_name)

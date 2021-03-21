@@ -10,19 +10,46 @@ z0  z1  ... zn
 import math
 
 def make_translate( x, y, z ):
-    pass
+    translate = new_matrix()
+    ident(translate)
+    translate[3][0], translate[3][1], translate[3][3] = x, y, z
+    return translate
 
 def make_scale( x, y, z ):
-    pass
+    scale = new_matrix()
+    ident(scale)
+    scale[0][0], scale[1][1], scale[2][2] = x, y, z
+    return scale
 
 def make_rotX( theta ):
-    pass
+    #convert degrees to radians
+    theta *= math.pi / 180
+    rotate = new_matrix()
+    ident(rotate)
+    cosine = math.cos(theta)
+    sine = math.sin(theta)
+    rotate[1][1], rotate[1][2], rotate[2][1], rotate[2][2] = cosine, sine, -sine, cosine
+    return rotate
 
 def make_rotY( theta ):
-    pass
+    #convert degrees to radians
+    theta *= math.pi / 180
+    rotate = new_matrix()
+    ident(rotate)
+    cosine = math.cos(theta)
+    sine = math.sin(theta)
+    rotate[0][0], rotate[0][2], rotate[2][0], rotate[2][2] = cosine, -sine, sine, cosine
+    return rotate
 
 def make_rotZ( theta ):
-    pass
+    #convert degrees to radians
+    theta *= math.pi / 180
+    rotate = new_matrix()
+    ident(rotate)
+    cosine = math.cos(theta)
+    sine = math.sin(theta)
+    rotate[0][0], rotate[0][1], rotate[1][0], rotate[1][1] = cosine, sine, -sine, cosine
+    return rotate
 
 #print the matrix such that it looks like
 #the template in the top comment

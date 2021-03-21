@@ -32,4 +32,58 @@ The file follows the following format:
 See the file script for an example of the file format
 """
 def parse_file( fname, points, transform, screen, color ):
-    pass
+    script = open(fname, 'r')
+    line_list = script.readlines()
+    num_lines = len(line_list)
+    current = 0
+
+    while current < num_lines-1:
+        line = line_list[current]
+        if current + 1 != num_lines:
+            next_row = line_list[current+1]
+        #line
+        if line == 'line\n':
+            points_list = next_row.split()
+            add_edge(points, int(points_list[0]), int(points_list[1]), int(points_list[2]), int(points_list[3]), int(points_list[4]), int(points_list[5]))
+        #ident
+        elif line == 'ident\n':
+            ident(transform)
+        #scale
+        elif line == 'scale\n':
+            scale = next_row.split()
+            scales = make_scale(int(scale[0]), int(scale[1]), int(scale[2]))
+            matrix_mult(scales, transform)
+        #translate
+        elif line == 'move\n':
+            translation = next_row.split()
+            matrix_mult(make_translate(int(translation[0]), int(translation[1]), int(translation[2])), transform)
+        #rotate
+        elif line == 'rotate\n':
+            theta = next_row.split()
+            var, rot = theta[0], float(theta[1])
+            if var == 'x':
+                rotate = make_rotX(rot)
+            elif var == 'y':
+                rotate = make_rotY(rot)
+            elif var == 'z':
+                rotate = make_rotZ(rot)
+            matrix_mult(rotate, transform)
+        #apply
+        elif line == 'apply\n':
+            matrix_mult(transform, points)
+        #display
+        elif line == 'display\n':
+            clear_screen(screen)
+            draw_lines(points, screen, color)
+            display(screen)
+        #save
+        elif line == 'save\n':
+            file_name = next_row.strip()
+            clear_screen(screen)
+            draw_lines(points, screen, color)
+            save_extension(screen, file_name)
+        #quit
+        elif line == 'quit\n':
+            break
+        current += 1
+    script.close()
